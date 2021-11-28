@@ -1,0 +1,5 @@
+C:\Users\Renan\Downloads\LoaderRS232\LoaderRS232T\LoaderRS232T\bin\Release\LoaderRS232T.exe
+C:\Users\Renan\Downloads\LoaderRS232\LoaderRS232T\LoaderRS232T\bin\Release\LoaderRS232T.pdb
+C:\Users\Renan\Downloads\LoaderRS232\LoaderRS232T\LoaderRS232T\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Renan\Downloads\LoaderRS232\LoaderRS232T\LoaderRS232T\obj\Release\LoaderRS232T.exe
+C:\Users\Renan\Downloads\LoaderRS232\LoaderRS232T\LoaderRS232T\obj\Release\LoaderRS232T.pdb

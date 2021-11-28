@@ -1,0 +1,379 @@
+
+LoaderRS232.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000004c  00001e00  00001e00  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bootloader   0000013e  00001e4c  00001e4c  000000e0  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .data         00000000  00800060  00001e4c  0000021e  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .bss          00000005  00800060  00800060  0000021e  2**0
+                  ALLOC
+  4 .stab         000006cc  00000000  00000000  00000220  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  5 .stabstr      00000097  00000000  00000000  000008ec  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .comment      0000002f  00000000  00000000  00000983  2**0
+                  CONTENTS, READONLY
+  7 .debug_aranges 00000020  00000000  00000000  000009b2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_info   0000010d  00000000  00000000  000009d2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_abbrev 00000098  00000000  00000000  00000adf  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_line   00000254  00000000  00000000  00000b77  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_frame  00000044  00000000  00000000  00000dcc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_str    000000cd  00000000  00000000  00000e10  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_loc    0000009b  00000000  00000000  00000edd  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 14 .debug_ranges 00000028  00000000  00000000  00000f78  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00001e00 <__vectors>:
+    1e00:	12 c0       	rjmp	.+36     	; 0x1e26 <__ctors_end>
+    1e02:	21 c0       	rjmp	.+66     	; 0x1e46 <__bad_interrupt>
+    1e04:	20 c0       	rjmp	.+64     	; 0x1e46 <__bad_interrupt>
+    1e06:	1f c0       	rjmp	.+62     	; 0x1e46 <__bad_interrupt>
+    1e08:	1e c0       	rjmp	.+60     	; 0x1e46 <__bad_interrupt>
+    1e0a:	1d c0       	rjmp	.+58     	; 0x1e46 <__bad_interrupt>
+    1e0c:	1c c0       	rjmp	.+56     	; 0x1e46 <__bad_interrupt>
+    1e0e:	1b c0       	rjmp	.+54     	; 0x1e46 <__bad_interrupt>
+    1e10:	1a c0       	rjmp	.+52     	; 0x1e46 <__bad_interrupt>
+    1e12:	19 c0       	rjmp	.+50     	; 0x1e46 <__bad_interrupt>
+    1e14:	18 c0       	rjmp	.+48     	; 0x1e46 <__bad_interrupt>
+    1e16:	17 c0       	rjmp	.+46     	; 0x1e46 <__bad_interrupt>
+    1e18:	16 c0       	rjmp	.+44     	; 0x1e46 <__bad_interrupt>
+    1e1a:	15 c0       	rjmp	.+42     	; 0x1e46 <__bad_interrupt>
+    1e1c:	14 c0       	rjmp	.+40     	; 0x1e46 <__bad_interrupt>
+    1e1e:	13 c0       	rjmp	.+38     	; 0x1e46 <__bad_interrupt>
+    1e20:	12 c0       	rjmp	.+36     	; 0x1e46 <__bad_interrupt>
+    1e22:	11 c0       	rjmp	.+34     	; 0x1e46 <__bad_interrupt>
+    1e24:	10 c0       	rjmp	.+32     	; 0x1e46 <__bad_interrupt>
+
+00001e26 <__ctors_end>:
+    1e26:	11 24       	eor	r1, r1
+    1e28:	1f be       	out	0x3f, r1	; 63
+    1e2a:	c0 e0       	ldi	r28, 0x00	; 0
+    1e2c:	d0 e0       	ldi	r29, 0x00	; 0
+    1e2e:	de bf       	out	0x3e, r29	; 62
+    1e30:	cd bf       	out	0x3d, r28	; 61
+
+00001e32 <__do_clear_bss>:
+    1e32:	20 e0       	ldi	r18, 0x00	; 0
+    1e34:	a0 e6       	ldi	r26, 0x60	; 96
+    1e36:	b0 e0       	ldi	r27, 0x00	; 0
+    1e38:	01 c0       	rjmp	.+2      	; 0x1e3c <.do_clear_bss_start>
+
+00001e3a <.do_clear_bss_loop>:
+    1e3a:	1d 92       	st	X+, r1
+
+00001e3c <.do_clear_bss_start>:
+    1e3c:	a5 36       	cpi	r26, 0x65	; 101
+    1e3e:	b2 07       	cpc	r27, r18
+    1e40:	e1 f7       	brne	.-8      	; 0x1e3a <.do_clear_bss_loop>
+    1e42:	04 d0       	rcall	.+8      	; 0x1e4c <_etext>
+    1e44:	01 c0       	rjmp	.+2      	; 0x1e48 <_exit>
+
+00001e46 <__bad_interrupt>:
+    1e46:	dc cf       	rjmp	.-72     	; 0x1e00 <__vectors>
+
+00001e48 <_exit>:
+    1e48:	f8 94       	cli
+
+00001e4a <__stop_program>:
+    1e4a:	ff cf       	rjmp	.-2      	; 0x1e4a <__stop_program>
+
+Disassembly of section .bootloader:
+
+00001e4c <main>:
+address_t adr;
+uint16_t data;
+
+BOOTLOADER_SECTION
+int main(void)
+{	
+    1e4c:	ef 92       	push	r14
+    1e4e:	ff 92       	push	r15
+    1e50:	0f 93       	push	r16
+    1e52:	1f 93       	push	r17
+    1e54:	cf 93       	push	r28
+    1e56:	df 93       	push	r29
+	/////////////////////////////
+	// Uart Init
+	
+	UCSRA = 0x02;
+    1e58:	82 e0       	ldi	r24, 0x02	; 2
+    1e5a:	8b b9       	out	0x0b, r24	; 11
+	UCSRB = (1<<TXEN) | (1<<RXEN);
+    1e5c:	88 e1       	ldi	r24, 0x18	; 24
+    1e5e:	8a b9       	out	0x0a, r24	; 10
+	UCSRC = (3<<UCSZ0);
+    1e60:	86 e0       	ldi	r24, 0x06	; 6
+    1e62:	80 bd       	out	0x20, r24	; 32
+	
+	UBRRH = 0;
+    1e64:	10 bc       	out	0x20, r1	; 32
+	UBRRL = (BootUBRR);
+    1e66:	19 b8       	out	0x09, r1	; 9
+	
+	UART_Write(LOADERIDH);
+    1e68:	86 ee       	ldi	r24, 0xE6	; 230
+    1e6a:	8c b9       	out	0x0c, r24	; 12
+	UART_Write(LOADERIDL);
+    1e6c:	85 ea       	ldi	r24, 0xA5	; 165
+    1e6e:	8c b9       	out	0x0c, r24	; 12
+	
+	adr = 0;
+    1e70:	10 92 63 00 	sts	0x0063, r1
+    1e74:	10 92 62 00 	sts	0x0062, r1
+	cmd = 0;
+    1e78:	10 92 64 00 	sts	0x0064, r1
+	
+	// Waiting for Host 
+	for(; adr < 60000;adr++ ){ 
+    1e7c:	80 e0       	ldi	r24, 0x00	; 0
+    1e7e:	90 e0       	ldi	r25, 0x00	; 0
+			__asm("nop");
+    1e80:	00 00       	nop
+
+		if( UART_DataIsReady()) {
+    1e82:	5f 9b       	sbis	0x0b, 7	; 11
+    1e84:	10 c0       	rjmp	.+32     	; 0x1ea6 <main+0x5a>
+			cmd = UART_Read();
+    1e86:	4c b1       	in	r20, 0x0c	; 12
+    1e88:	40 93 64 00 	sts	0x0064, r20
+			if( cmd == PROG){
+    1e8c:	41 3f       	cpi	r20, 0xF1	; 241
+    1e8e:	59 f4       	brne	.+22     	; 0x1ea6 <main+0x5a>
+				UART_Write(CHECKBYTE);						// send checkbyte, identificating device
+    1e90:	8e ea       	ldi	r24, 0xAE	; 174
+    1e92:	8c b9       	out	0x0c, r24	; 12
+    1e94:	88 ec       	ldi	r24, 0xC8	; 200
+				
+				for(char i=0; i<200; i++)					// wait a little to send page size and flash size
+					__asm("nop");
+    1e96:	00 00       	nop
+    1e98:	81 50       	subi	r24, 0x01	; 1
+		if( UART_DataIsReady()) {
+			cmd = UART_Read();
+			if( cmd == PROG){
+				UART_Write(CHECKBYTE);						// send checkbyte, identificating device
+				
+				for(char i=0; i<200; i++)					// wait a little to send page size and flash size
+    1e9a:	e9 f7       	brne	.-6      	; 0x1e96 <main+0x4a>
+					__asm("nop");
+					
+				UART_Write(SPM_PAGESIZE/8);					// page size
+    1e9c:	88 e0       	ldi	r24, 0x08	; 8
+    1e9e:	8c b9       	out	0x0c, r24	; 12
+				UART_Write(FLASH_SIZE/(SPM_PAGESIZE*8));	// chip size in pages
+    1ea0:	80 e1       	ldi	r24, 0x10	; 16
+    1ea2:	8c b9       	out	0x0c, r24	; 12
+				
+				break;
+    1ea4:	54 c0       	rjmp	.+168    	; 0x1f4e <main+0x102>
+	
+	adr = 0;
+	cmd = 0;
+	
+	// Waiting for Host 
+	for(; adr < 60000;adr++ ){ 
+    1ea6:	01 96       	adiw	r24, 0x01	; 1
+    1ea8:	90 93 63 00 	sts	0x0063, r25
+    1eac:	80 93 62 00 	sts	0x0062, r24
+    1eb0:	80 36       	cpi	r24, 0x60	; 96
+    1eb2:	4a ee       	ldi	r20, 0xEA	; 234
+    1eb4:	94 07       	cpc	r25, r20
+    1eb6:	21 f7       	brne	.-56     	; 0x1e80 <main+0x34>
+    1eb8:	4a c0       	rjmp	.+148    	; 0x1f4e <main+0x102>
+			}
+		}
+	}
+	
+	while( cmd == PROG ){
+		if( UART_DataIsReady() ){
+    1eba:	5f 9b       	sbis	0x0b, 7	; 11
+    1ebc:	fe cf       	rjmp	.-4      	; 0x1eba <main+0x6e>
+			// Cmd
+			cmd = UART_Read();
+    1ebe:	8c b1       	in	r24, 0x0c	; 12
+    1ec0:	80 93 64 00 	sts	0x0064, r24
+			if( cmd == PROG ){
+    1ec4:	81 3f       	cpi	r24, 0xF1	; 241
+    1ec6:	09 f0       	breq	.+2      	; 0x1eca <main+0x7e>
+    1ec8:	4e c0       	rjmp	.+156    	; 0x1f66 <main+0x11a>
+				// Page Address
+				while(!UART_DataIsReady());
+    1eca:	5f 9b       	sbis	0x0b, 7	; 11
+    1ecc:	fe cf       	rjmp	.-4      	; 0x1eca <main+0x7e>
+				adr = UART_Read();
+    1ece:	8c b1       	in	r24, 0x0c	; 12
+				
+#if FLASH_SIZE <= 65536
+				adr <<= 8;
+    1ed0:	b8 2f       	mov	r27, r24
+    1ed2:	a0 e0       	ldi	r26, 0x00	; 0
+    1ed4:	b0 93 63 00 	sts	0x0063, r27
+    1ed8:	a0 93 62 00 	sts	0x0062, r26
+				while(!UART_DataIsReady());
+    1edc:	5f 9b       	sbis	0x0b, 7	; 11
+    1ede:	fe cf       	rjmp	.-4      	; 0x1edc <main+0x90>
+				adr |= UART_Read();
+    1ee0:	8c b1       	in	r24, 0x0c	; 12
+    1ee2:	bd 01       	movw	r22, r26
+    1ee4:	68 2b       	or	r22, r24
+    1ee6:	70 93 63 00 	sts	0x0063, r23
+    1eea:	60 93 62 00 	sts	0x0062, r22
+					while(!UART_DataIsReady());
+					adr |= UART_Read();
+				}
+#endif
+				// fill the page buffer 
+				for( uint16_t i=0; i<SPM_PAGESIZE; i+=2){
+    1eee:	ce 01       	movw	r24, r28
+					// Data
+					while(!UART_DataIsReady());
+    1ef0:	5f 9b       	sbis	0x0b, 7	; 11
+    1ef2:	fe cf       	rjmp	.-4      	; 0x1ef0 <main+0xa4>
+					data = UART_Read();
+    1ef4:	4c b1       	in	r20, 0x0c	; 12
+					data <<= 8;
+    1ef6:	34 2f       	mov	r19, r20
+    1ef8:	20 e0       	ldi	r18, 0x00	; 0
+    1efa:	30 93 61 00 	sts	0x0061, r19
+    1efe:	20 93 60 00 	sts	0x0060, r18
+					while(!UART_DataIsReady());
+    1f02:	5f 9b       	sbis	0x0b, 7	; 11
+    1f04:	fe cf       	rjmp	.-4      	; 0x1f02 <main+0xb6>
+					data |= UART_Read();
+    1f06:	4c b1       	in	r20, 0x0c	; 12
+    1f08:	f9 01       	movw	r30, r18
+    1f0a:	e4 2b       	or	r30, r20
+    1f0c:	af 01       	movw	r20, r30
+    1f0e:	50 93 61 00 	sts	0x0061, r21
+    1f12:	40 93 60 00 	sts	0x0060, r20
+uint8_t cmd;
+address_t adr;
+uint16_t data;
+
+BOOTLOADER_SECTION
+int main(void)
+    1f16:	fc 01       	movw	r30, r24
+    1f18:	e6 0f       	add	r30, r22
+    1f1a:	f7 1f       	adc	r31, r23
+					data = UART_Read();
+					data <<= 8;
+					while(!UART_DataIsReady());
+					data |= UART_Read();
+					
+					boot_page_fill(adr+i, data);
+    1f1c:	0a 01       	movw	r0, r20
+    1f1e:	10 93 57 00 	sts	0x0057, r17
+    1f22:	e8 95       	spm
+    1f24:	11 24       	eor	r1, r1
+					while(!UART_DataIsReady());
+					adr |= UART_Read();
+				}
+#endif
+				// fill the page buffer 
+				for( uint16_t i=0; i<SPM_PAGESIZE; i+=2){
+    1f26:	02 96       	adiw	r24, 0x02	; 2
+    1f28:	80 34       	cpi	r24, 0x40	; 64
+    1f2a:	91 05       	cpc	r25, r1
+    1f2c:	09 f7       	brne	.-62     	; 0x1ef0 <main+0xa4>
+					
+					boot_page_fill(adr+i, data);
+				}
+				
+				// write program to flash
+				boot_page_erase(adr);
+    1f2e:	fb 01       	movw	r30, r22
+    1f30:	e0 92 57 00 	sts	0x0057, r14
+    1f34:	e8 95       	spm
+				boot_spm_busy_wait();
+    1f36:	07 b6       	in	r0, 0x37	; 55
+    1f38:	00 fc       	sbrc	r0, 0
+    1f3a:	fd cf       	rjmp	.-6      	; 0x1f36 <main+0xea>
+			
+				boot_page_write(adr);
+    1f3c:	fb 01       	movw	r30, r22
+    1f3e:	f0 92 57 00 	sts	0x0057, r15
+    1f42:	e8 95       	spm
+				boot_spm_busy_wait();
+    1f44:	07 b6       	in	r0, 0x37	; 55
+    1f46:	00 fc       	sbrc	r0, 0
+    1f48:	fd cf       	rjmp	.-6      	; 0x1f44 <main+0xf8>
+			
+				UART_Write(ACK);
+    1f4a:	0c b9       	out	0x0c, r16	; 12
+    1f4c:	0c c0       	rjmp	.+24     	; 0x1f66 <main+0x11a>
+					while(!UART_DataIsReady());
+					adr |= UART_Read();
+				}
+#endif
+				// fill the page buffer 
+				for( uint16_t i=0; i<SPM_PAGESIZE; i+=2){
+    1f4e:	c0 e0       	ldi	r28, 0x00	; 0
+    1f50:	d0 e0       	ldi	r29, 0x00	; 0
+					data = UART_Read();
+					data <<= 8;
+					while(!UART_DataIsReady());
+					data |= UART_Read();
+					
+					boot_page_fill(adr+i, data);
+    1f52:	11 e0       	ldi	r17, 0x01	; 1
+				}
+				
+				// write program to flash
+				boot_page_erase(adr);
+    1f54:	0f 2e       	mov	r0, r31
+    1f56:	f3 e0       	ldi	r31, 0x03	; 3
+    1f58:	ef 2e       	mov	r14, r31
+    1f5a:	f0 2d       	mov	r31, r0
+				boot_spm_busy_wait();
+			
+				boot_page_write(adr);
+    1f5c:	0f 2e       	mov	r0, r31
+    1f5e:	f5 e0       	ldi	r31, 0x05	; 5
+    1f60:	ff 2e       	mov	r15, r31
+    1f62:	f0 2d       	mov	r31, r0
+				boot_spm_busy_wait();
+			
+				UART_Write(ACK);
+    1f64:	05 ef       	ldi	r16, 0xF5	; 245
+				break;
+			}
+		}
+	}
+	
+	while( cmd == PROG ){
+    1f66:	80 91 64 00 	lds	r24, 0x0064
+    1f6a:	81 3f       	cpi	r24, 0xF1	; 241
+    1f6c:	09 f4       	brne	.+2      	; 0x1f70 <main+0x124>
+    1f6e:	a5 cf       	rjmp	.-182    	; 0x1eba <main+0x6e>
+			}
+		}
+	}
+	
+	// Exit BootLoader - Go to program
+	RESET();
+    1f70:	1a b8       	out	0x0a, r1	; 10
+    1f72:	e0 e0       	ldi	r30, 0x00	; 0
+    1f74:	f0 e0       	ldi	r31, 0x00	; 0
+    1f76:	09 94       	ijmp
+    1f78:	80 e0       	ldi	r24, 0x00	; 0
+    1f7a:	90 e0       	ldi	r25, 0x00	; 0
+    1f7c:	df 91       	pop	r29
+    1f7e:	cf 91       	pop	r28
+    1f80:	1f 91       	pop	r17
+    1f82:	0f 91       	pop	r16
+    1f84:	ff 90       	pop	r15
+    1f86:	ef 90       	pop	r14
+    1f88:	08 95       	ret
